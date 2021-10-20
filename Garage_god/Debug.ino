@@ -1,5 +1,5 @@
 void Debug() {
-  /*
+  
     Serial.print(action_state);
     Serial.print("\t");
 
@@ -7,5 +7,5 @@ void Debug() {
     Serial.print("\t");
 
     Serial.println(action_current_10);
-  */
+  
 }
