@@ -5,8 +5,8 @@ int action_special = 0;
 int action_state = 0;
 int action_change = 0;
 int action_current_10 = 0;
-int bootflag = 1;
-int bootup = 0;
+int action_boot = 0;
+int bootflag = 0;
 
 int door_state = 4;
 //0 - Closed
@@ -79,6 +79,7 @@ void setup() {
 
   pinMode(8, INPUT_PULLUP);
   pinMode(9, INPUT_PULLUP);
+  pinMode(10, INPUT_PULLUP);
   pinMode(LED_BUILTIN, OUTPUT);
 
   lcd.setCursor(3, 0);
@@ -107,6 +108,42 @@ void setup() {
     lcd.setCursor(12, 1);
     lcd.print (timer);
   }
+
+  door_action = 0;
+  light_timer = 30;
+  light_state = 0;
+
+
+  delay(500);
+  lcd.setCursor(0, 0);
+  lcd.print ("                  ");
+
+  while (bootflag < 6) {
+
+    if (action_current_10 == 4 || action_current_10 == 0) {
+      if (action_boot - action_current_10 != 0) {
+        action_boot = action_current_10;
+        bootflag++;
+      }
+    }
+
+    lcd.setCursor(0, 0);
+    lcd.print ("Err:System Locked   ");
+    lcd.setCursor(19, 0);
+    lcd.print (3 - (bootflag / 2));
+
+    Read_input();
+    Lcd();
+    Lights();
+    Door();
+    End_stops();
+  }
+
+  lcd.setCursor(4, 1);
+  lcd.print ("                ");
+  lcd.setCursor(0, 0);
+  lcd.print ("   - Garage God -   ");
+
 }
 
 void loop() {

@@ -16,9 +16,6 @@ void Action_selector() {
   if (action_current_10 != action_change) {
     action_change = action_current_10;
     action_state = 1;
-    if (bootflag == 1) {
-      action_special = 1;
-    }
   }
 
   if (action_state == 1 && action_current_10 == 0) { //0 - Idle State
@@ -55,13 +52,8 @@ void Action_selector() {
     action_state = 0;
   }
 
-  if ((action_state == 1 && action_current_10 == 8) || action_special == 1) { //8 - Close Door, Lights Off
-    if (bootflag == 1) {
-      bootflag = 0;
-      action_change = 0;
-    }
+  if (action_state == 1 && action_current_10 == 8) { //8 - Close Door, Lights Off
     action_state = 0;
-    action_special = 0;
     door_action = 0;
     light_timer = 30;
     light_state = 0;

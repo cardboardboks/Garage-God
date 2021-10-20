@@ -4,6 +4,7 @@ void Lcd() {
   if (currentMillis1 - previousMillis1 >= interval1) {
     previousMillis1 = currentMillis1;
 
+/*
     lcd.setCursor(3, 0);
     lcd.print ("              ");
     lcd.setCursor(0, 0);
@@ -14,13 +15,13 @@ void Lcd() {
     lcd.print (action_change);
     lcd.setCursor(14, 0);
     lcd.print ("");
-
+*/
 
     //Status
 
-    if ((action_current_10 == 0 || action_current_10 == 9) && (door_state == 0 || door_state == 1)) {
+    if (((action_current_10 == 0 || action_current_10 == 9) && (door_state == 0 || door_state == 1)) && bootflag >= 3) {
       lcd.setCursor(4, 1);
-      lcd.print ("System Idle     ");
+       lcd.print ("System Idle     ");
     }
 
     //Door State
